@@ -7,10 +7,15 @@ class UserPolicy
   end
 
   def index?
+    binding.pry
     # true
     @current_user.admin?
     # scope.where(:id => @user.id).exists?
   end
+
+  # def new?
+  #   @current_user == @user
+  # end
 
   # def edit?
   #   binding.pry
