@@ -18,6 +18,7 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   def new
     @company = Company.new
+    @logo = @company.logos.new
     authorize @company
   end
 
@@ -77,6 +78,8 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:name, :description, :contactname, :street, :city, :postcode, :country, :phone, :email, :homepage)
+      params.require(:company).permit(:name, :description, :contactname, :street, :city, :postcode, :country, :phone, :email, :homepage,
+                     logos_attributes: [:file, :description, :id])
     end
+
 end

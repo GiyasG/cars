@@ -7,8 +7,6 @@ class UserPolicy
   end
 
   def index?
-    binding.pry
-    # true
     @current_user.admin?
     # scope.where(:id => @user.id).exists?
   end

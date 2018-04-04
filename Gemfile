@@ -11,7 +11,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 # gem 'high_voltage'
 gem 'pundit', '~>1.1', '>=1.1.0'
-
+gem 'mini_magick'
 
 group :development, :test do
   gem 'pry-byebug', '~>3.4', '>=3.4.0'

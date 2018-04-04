@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Logo</th>
       <th>Name</th>
       <th>Description</th>
       <th>Contactname</th>
@@ -22,6 +23,8 @@
   <tbody>
     <% @companies.each do |company| %>
       <tr>
+        <td><%= image_tag url_for(:controller => "logos", :action => "show_company", :company_id=>company.id,
+          :id=>company.logos[0][:id]), class: "col-md-2"%></td>
         <td><%= company.name %></td>
         <td><%= company.description %></td>
         <td><%= company.contactname %></td>

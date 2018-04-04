@@ -51,6 +51,35 @@
     <%= f.label :homepage %><br>
     <%= f.text_field :homepage %>
   </div>
+
+  <%= f.fields_for :logos, @logo do |ff| %>
+    <% if (ff.object.company_id).present? %>
+    <h2>Edit logo</h2>
+      <%= image_tag url_for(:controller => "logos", :action => "show",
+                            :company_id=>ff.object.company_id, :id=>ff.object.id),
+                            class: "col-md-2 img-thumbnail"%>
+      <div class="field">
+        <p><%= ff.object.filename %></p>
+        <%= ff.file_field :file %><br>
+      </div>
+      <div class="field">
+          <%= ff.label :description %>
+          <%= ff.text_field :description, :value => ff.object.description %>
+      </div>
+
+    <% else %>
+
+    <h2>Add logo</h2>
+        <div class="field">
+          <%= ff.file_field :file %><br>
+        </div>
+        <div class="field">
+          <%= ff.label :description %>
+          <%= ff.text_field :description %>
+        </div>
+    <% end %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
