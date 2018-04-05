@@ -15,6 +15,9 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    respond_to do |format|
+	     format.js {render layout: false}
+	  end
   end
 
   # GET /companies/new
@@ -38,11 +41,11 @@ class CompaniesController < ApplicationController
       if @company.save
         @company.user_id = current_user.id
         @company.save
-        format.html { redirect_to @company, notice: 'Company was successfully created.' }
+        format.html { redirect_to companies_path, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else
         format.html { render :new }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
+        format.json { render json: companies_path.errors, status: :unprocessable_entity }
       end
     end
   end

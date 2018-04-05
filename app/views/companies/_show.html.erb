@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-1">
+     <%= image_tag url_for(:controller => "logos", :action => "show_company", :company_id=>@company.id,
+     :id=>@company.logos[0][:id]), class: "img-thumbnail"%>
+  </div>
+  <div class="col-md-2">
+      <h4><span><%= @company.name %></span></h4>
+    </div>
+
+  <div class="col-md-2">
+      <h5>Contact person: <span><%= @company.contactname %></span></h5>
+  </div>
+
+  <div class="col-md-4">
+      <h5>Address: <%= @company.street %>, <%= @company.city %>, <%= @company.postcode %>, <%= @company.country %></h5>
+  </div>
+
+
+  <div class="col-md-3">
+      <h5>Contacts: <span><%= @company.phone %>, <%= @company.email %></span></h5>
+  </div>
+
+  <div class="col-md-1">
+      <h5>Homepage: <%= @company.homepage %></h5>
+  </div>
+
+      <%= simple_format(@company.description, class: "col-md-12")%>
+</div>
+<% if user_signed_in? %>
+  <% if current_user.try(:vip?) %>
+    <%= link_to 'Edit', edit_company_path(@company), class: "btn btn-warning col-md-1 putinline" %>
+  <% end %>
+<% end %>
