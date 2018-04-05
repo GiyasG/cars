@@ -2,6 +2,8 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   after_action :verify_authorized, only: [:new, :edit, :update, :destroy]
+  before_filter :edit_company_params, :only => [:update]
+
 
   # GET /companies
   # GET /companies.json
@@ -48,6 +50,7 @@ class CompaniesController < ApplicationController
   # PATCH/PUT /companies/1
   # PATCH/PUT /companies/1.json
   def update
+    authorize @company
     respond_to do |format|
       if @company.update(company_params)
         format.html { redirect_to @company, notice: 'Company was successfully updated.' }
@@ -67,6 +70,18 @@ class CompaniesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def edit_company_params
+    authorize @company
+    if company_params[:logos_attributes][:"0"][:file].present?
+      @logo = @company.logos.find(company_params[:logos_attributes][:"0"][:id])
+      @logo.filename = company_params[:logos_attributes][:"0"][:file].original_filename
+      @logo.content_type = company_params[:logos_attributes][:"0"][:file].content_type
+      @logo.file_contents = company_params[:logos_attributes][:"0"][:file].read
+      @logo.save
+      params[:company][:logos_attributes][:"0"].except!(:file)
     end
   end
 

@@ -1,54 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-1">
+     <%= image_tag url_for(:controller => "logos", :action => "show_company", :company_id=>@company.id,
+     :id=>@company.logos[0][:id]), class: "img-thumbnail"%>
+  </div>
+  <div class="col-md-2">
+      <h4><span><%= @company.name %></span></h4>
+    </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @company.name %>
-</p>
+  <div class="col-md-2">
+      <h5>Contact person: <span><%= @company.contactname %></span></h5>
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @company.description %>
-</p>
+  <div class="col-md-4">
+      <h5>Address: <%= @company.street %>, <%= @company.city %>, <%= @company.postcode %>, <%= @company.country %></h5>
+  </div>
 
-<p>
-  <strong>Contactname:</strong>
-  <%= @company.contactname %>
-</p>
 
-<p>
-  <strong>Street:</strong>
-  <%= @company.street %>
-</p>
+  <div class="col-md-3">
+      <h5>Contacts: <span><%= @company.phone %>, <%= @company.email %></span></h5>
+  </div>
 
-<p>
-  <strong>City:</strong>
-  <%= @company.city %>
-</p>
+  <div class="col-md-1">
+      <h5>Homepage: <%= @company.homepage %></h5>
+  </div>
 
-<p>
-  <strong>Postcode:</strong>
-  <%= @company.postcode %>
-</p>
+      <%= simple_format(@company.description, class: "col-md-12")%>
+</div>
 
-<p>
-  <strong>Country:</strong>
-  <%= @company.country %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @company.phone %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @company.email %>
-</p>
-
-<p>
-  <strong>Homepage:</strong>
-  <%= @company.homepage %>
-</p>
-
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+<%= link_to 'Edit', edit_company_path(@company), class: "btn btn-warning col-md-1 putinline" %>
+<%= link_to 'Back', companies_path, class: "label-back col-md-1" %>

@@ -16,7 +16,7 @@ class ApplicationPolicy
   end
 
   def create?
-    authorize current_user
+    @user.vip? or @record.user_id == @user.id
   end
 
   def new?
@@ -24,7 +24,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    @user.vip? or @record.user_id == @user.id
   end
 
   def edit?
