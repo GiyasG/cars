@@ -1,1 +1,25 @@
-$("#current_company").html("<%= escape_javascript(render partial: 'companies/show', locals: { company: @company } ) %>");
+// e.preventDefault();
+// var id = $(this).attr('id');
+// alert(id);
+// $("#"+id).html("<%= escape_javascript(render partial: 'companies/show', locals: { company: @company, id: "cmp" } ) %>");
+
+$("div").click(function() {
+  // e.preventDefault();
+  var id = $(this).attr("id");
+  // alert($("#"+id).attr("class").indexOf("col-md-2"));
+  if ($("#"+id).attr("class").indexOf("col-md-2") > 0) {
+    $("#"+id).removeClass("col-md-2").addClass("col-md-12");
+    // $("#"+id).attr("id", id.substring(4, parseInt(id.length))+"cmp_");
+  } else {
+    $("#"+id).removeClass("col-md-12").addClass("col-md-2");
+  }
+
+
+  // if (id.substr(0,1)=="c") {
+  //   $("#"+id).removeClass("col-md-2").addClass("col-md-12");
+  //   $("#"+id).attr("id", id.substring(4, parseInt(id.length))+"cmp_");
+  // } else {
+  //   $("#"+id).removeClass("col-md-12").addClass("col-md-2");
+  // }
+
+});

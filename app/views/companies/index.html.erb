@@ -3,14 +3,14 @@
 <h1>Companies</h1>
 <div class='row'>
 
-    <% @companies.each do |company| %>
-    <div class="col-md-2 col-sm-4 text-center">
+    <% @companies.each_with_index do |company, index| %>
+    <%= content_tag :div, :id => "cmp_#{index}", class: "cmp_#{index} col-md-2 col-sm-4 text-center" do %>
         <%= link_to company, remote: true  do%>
              <%= image_tag url_for(:controller => "logos", :action => "show_company", :company_id=>company.id,
               :id=>company.logos[0][:id]), class: "img-fit img-thumbnail"%>
              <%= content_tag :h4, company.name%>
-             <% end %>
-         <% if user_signed_in? %>
+        <% end %>
+          <% if user_signed_in? %>
            <% if current_user.try(:vip?) %>
            <div class="col-md-6 putinline">
              <%= link_to 'Edit', edit_company_path(company), class: "btn btn-warning" %>
@@ -19,7 +19,7 @@
            </div>
        <% end %>
      <% end %>
-   </div>
+   <% end %>
    <% end %>
     <div id="current_company" class="dismissible">
     </div>
