@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :set_company, only: [:show, :show_current_company, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   after_action :verify_authorized, only: [:new, :edit, :update, :destroy]
   before_filter :edit_company_params, :only => [:update]
@@ -17,6 +17,12 @@ class CompaniesController < ApplicationController
   def show
     respond_to do |format|
 	     format.js {render layout: false}
+	  end
+  end
+
+  def show_current_company
+    respond_to do |format|
+        format.html { render :show_current_company }
 	  end
   end
 

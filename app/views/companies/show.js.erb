@@ -3,23 +3,18 @@
 // alert(id);
 // $("#"+id).html("<%= escape_javascript(render partial: 'companies/show', locals: { company: @company, id: "cmp" } ) %>");
 
-$("div").click(function() {
-  // e.preventDefault();
+$(".cmp").click(function(e) {
+  e.preventDefault();
   var id = $(this).attr("id");
-  // alert($("#"+id).attr("class").indexOf("col-md-2"));
-  if ($("#"+id).attr("class").indexOf("col-md-2") > 0) {
+  // alert(id);
+  if (id.substr(0,1)=="c") {
     $("#"+id).removeClass("col-md-2").addClass("col-md-12");
-    // $("#"+id).attr("id", id.substring(4, parseInt(id.length))+"cmp_");
+    $("#"+id).attr("id", id.substring(4, parseInt(id.length))+"cmp_");
+    // var id = $(this).attr("id");
+    // $("#"+id).html("<%= escape_javascript(render partial: 'companies/show', locals: { company: @company, id: "cmp" } ) %>");
   } else {
     $("#"+id).removeClass("col-md-12").addClass("col-md-2");
+    $("#"+id).attr("id", "cmp_"+id.substring(1, -parseInt(id.length)));
   }
-
-
-  // if (id.substr(0,1)=="c") {
-  //   $("#"+id).removeClass("col-md-2").addClass("col-md-12");
-  //   $("#"+id).attr("id", id.substring(4, parseInt(id.length))+"cmp_");
-  // } else {
-  //   $("#"+id).removeClass("col-md-12").addClass("col-md-2");
-  // }
 
 });
