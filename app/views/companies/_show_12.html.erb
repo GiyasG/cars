@@ -1,3 +1,4 @@
+<%= link_to company, remote: true  do%>
 <div class="row">
   <div class="col-md-1">
      <%= image_tag url_for(:controller => "logos", :action => "show_company", :company_id=>@company.id,
@@ -29,3 +30,4 @@
 
 <%= link_to 'Edit', edit_company_path(@company), class: "btn btn-warning col-md-1 putinline" %>
 <%= link_to 'Back', companies_path, class: "label-back col-md-1" %>
+<% end%>
