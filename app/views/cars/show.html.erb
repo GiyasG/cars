@@ -1,0 +1,18 @@
+    <div class='row'>
+      <%= content_tag :h4, "#{@project.title}", class: "col-md-12"%>
+      <%= image_tag url_for(:controller => "photos", :action => "show_project", :project_id=>@project.id), class: "col-md-3 img-thumbnail"%>
+      <div class="text-justify">
+        <%= simple_format("#{@project.about}", class: "text-justify")%>
+      </div>
+      <%= content_tag :h5, "Start date: #{@project.started}", class: "col-md-4"%>
+      <%= content_tag :h5, "Closing date: #{@project.finished}", class: "col-md-4"%>
+      <%= content_tag :h5, class: "col-md-4" do%>
+        <%= content_tag :spam, "URL:"%>
+        <%= link_to "http://#{@project.url}/", "http://#{@project.url}/", target: "_blank"%>
+      <% end%>
+      <%= content_tag :h4, "Project team", class: "col-md-12"%>
+      <%= content_tag :h5, "#{@project.teams.map {|c| c.title+' '+c.name+' '+c.surname}.join(', ')}", class: "col-md-12" %>
+      <div>
+        <%= link_to 'Back', "/#prj", class: "label-back" %>
+      </div>
+    </div>

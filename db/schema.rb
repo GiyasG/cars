@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404121502) do
+ActiveRecord::Schema.define(version: 20180413131546) do
+
+  create_table "cars", force: :cascade do |t|
+    t.string   "make",           null: false
+    t.string   "model",          null: false
+    t.datetime "year"
+    t.string   "body"
+    t.string   "version"
+    t.string   "classification"
+    t.string   "type"
+    t.integer  "door"
+    t.integer  "seat"
+    t.string   "engineplace"
+    t.string   "drivetrain"
+    t.integer  "company_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "cars", ["company_id"], name: "index_cars_on_company_id"
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",                     null: false
@@ -45,6 +64,24 @@ ActiveRecord::Schema.define(version: 20180404121502) do
 
   add_index "logos", ["company_id"], name: "index_logos_on_company_id"
   add_index "logos", ["user_id"], name: "index_logos_on_user_id"
+
+  create_table "photos", force: :cascade do |t|
+    t.string   "filename"
+    t.string   "content_type"
+    t.binary   "file_contents"
+    t.string   "description"
+    t.integer  "car_id"
+    t.integer  "bike_id"
+    t.integer  "carpart_id"
+    t.integer  "bikepart_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "photos", ["bike_id"], name: "index_photos_on_bike_id"
+  add_index "photos", ["bikepart_id"], name: "index_photos_on_bikepart_id"
+  add_index "photos", ["car_id"], name: "index_photos_on_car_id"
+  add_index "photos", ["carpart_id"], name: "index_photos_on_carpart_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

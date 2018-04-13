@@ -1,0 +1,12 @@
+<% @company.cars.each do |car|%>
+<div class='row show-grid'>
+  <%= content_tag :h4, "#{car.make}", class: "col-md-12"%>
+  <%= image_tag url_for(:controller => "photos", :action => "show_car", :car_id=>car.id), class: "col-md-3 img-thumbnail"%>
+</div>
+
+<div class="text-center">
+  <%= link_to 'Edit', [:edit, @company, car], class: "btn btn-warning"%>
+  <%= link_to 'Delete', [@company, car], class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
+<hr>
+<% end %>

@@ -1,0 +1,6 @@
+    <%= link_to [@company, car] do%>
+    <div class="col-md-3 col-sm-6 text-center">
+      <%= content_tag :h5, "#{car.make}"%>
+      <%= image_tag url_for(:controller => "photos", :action => "show_car", :car_id=>car.id), class: "img-fit img-rounded"%>
+    </div>
+    <% end %>

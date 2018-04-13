@@ -1,0 +1,60 @@
+<%= form_for ([@company, @car]), :html => { :multipart => true } do |f| %>
+  <% if @car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
+      <ul>
+      <% @car.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :make %><br>
+    <%= f.text_field :make %>
+  </div>
+  <div class="field">
+    <%= f.label :model %><br>
+    <%= f.text_field :model %>
+  </div>
+
+  <div class="row">
+  <%= f.fields_for :photos, @car.photos do |ff| %>
+    <% if (ff.object).present? %>
+    <div>
+    <h2>Edit photo</h2>
+      <%= image_tag url_for(:controller => "photos", :action => "show_car",
+                            :car_id=>ff.object.car_id), class: "col-md-3 img-thumbnail"%>
+    </div>
+
+    <div class="col-md-2">
+      <div class="field">
+        <p><%= ff.object.filename %></p>
+        <%= ff.file_field :file, class: "btn btn-primary" %><br>
+      </div>
+      <div class="field">
+          <%= ff.label :description %>
+          <%= ff.text_field :description, :value => ff.object.description %>
+      </div>
+    </div>
+
+    <% else %>
+    <h2>Add photo</h2>
+        <div class="field">
+          <%= ff.file_field :file, class: "btn btn-primary" %><br>
+        </div>
+        <div class="field">
+          <%= ff.label :description %>
+          <%= ff.text_field :description %>
+        </div>
+
+    <% end %>
+  <% end %>
+</div>
+
+  <div class="actions">
+    <%= f.submit"Save", class: "btn btn-primary" %>
+  </div>
+
+<% end %>
