@@ -9,6 +9,7 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @companies = Company.all
+    @cars = Car.all
     authorize @companies
   end
 
@@ -17,12 +18,6 @@ class CompaniesController < ApplicationController
   def show
     respond_to do |format|
 	     format.js {render layout: false}
-	  end
-  end
-
-  def show_current_company
-    respond_to do |format|
-        format.html { render :show_current_company }
 	  end
   end
 

@@ -1,21 +1,24 @@
 class CarsController < ApplicationController
-  before_action :set_ccompany, only: [:show, :edit, :update, :destroy]
+  before_action :set_company, only: [:new, :create, :show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   after_action :verify_authorized, only: [:new, :edit, :update, :destroy]
-  # before_filter :edit_car_params, :only => [:update]
+  before_filter :edit_car_params, :only => [:update]
 
 
   def show
     @car = @company.cars.find(params[:id])
+    authorize @company
   end
  #
  def new
    @car = @company.cars.new
-   # @photo = @car.photos.new
+   authorize @company
+   @photo = @car.photos.new
  end
 
  def edit
    @car = @company.cars.find(params[:id])
+   authorize @company
  end
 
  def create
@@ -33,9 +36,8 @@ class CarsController < ApplicationController
 
 
  def update
-
+   authorize @company
      @car = @company.cars.find(params[:id])
-
      if @car.update_attributes(car_params) # @car.update
        redirect_to @company, notice: "Car successfully updated!"
      else
@@ -46,25 +48,24 @@ class CarsController < ApplicationController
 
 
  def destroy
+   authorize @company
    @car = @company.cars.find(params[:id])
    @car.destroy
    redirect_to @company, notice: "Car deleted!"
  end
 
 
-
-
-  # def edit_car_params
-  #   authorize @car
-  #   if car_params[:photos_attributes][:"0"][:file].present?
-  #     @photo = @car.photos.find(car_params[:photos_attributes][:"0"][:id])
-  #     @photo.filename = car_params[:photos_attributes][:"0"][:file].original_filename
-  #     @photo.content_type = car_params[:photos_attributes][:"0"][:file].content_type
-  #     @photo.file_contents = car_params[:photos_attributes][:"0"][:file].read
-  #     @photo.save
-  #     params[:car][:photos_attributes][:"0"].except!(:file)
-  #   end
-  # end
+  def edit_car_params
+    authorize @company
+    if car_params[:photos_attributes][:"0"][:file].present?
+      @photo = @car.photos.find(car_params[:photos_attributes][:"0"][:id])
+      @photo.filename = car_params[:photos_attributes][:"0"][:file].original_filename
+      @photo.content_type = car_params[:photos_attributes][:"0"][:file].content_type
+      @photo.file_contents = car_params[:photos_attributes][:"0"][:file].read
+      @photo.save
+      params[:car][:photos_attributes][:"0"].except!(:file)
+    end
+  end
 
 
   private
