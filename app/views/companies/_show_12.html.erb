@@ -16,3 +16,9 @@
 </div>
 </div>
 <% end%>
+<% if user_signed_in? %>
+ <% if current_user.try(:vip?) %>
+   <%= link_to 'Edit', edit_company_path(company), class: "btn btn-warning" %>
+   <%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+ <% end %>
+<% end %>

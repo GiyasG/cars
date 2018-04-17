@@ -19,6 +19,51 @@
     <%= f.text_field :model %>
   </div>
 
+    <div class="field">
+      <%= f.label :year %><br>
+      <%= f.date_select :year, :order => [:year] %>
+    </div>
+
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_field :body %>
+  </div>
+
+  <div class="field">
+    <%= f.label :version %><br>
+    <%= f.text_field :version %>
+  </div>
+
+  <div class="field">
+    <%= f.label :classification %><br>
+    <%= f.text_field :classification %>
+  </div>
+
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+
+  <div class="field">
+    <%= f.label :door %><br>
+    <%= f.number_field :door %>
+  </div>
+
+  <div class="field">
+    <%= f.label :engineplace %><br>
+    <%= f.text_field :engineplace %>
+  </div>
+
+  <div class="field">
+    <%= f.label :engineplace %><br>
+    <%= f.text_field :engineplace %>
+  </div>
+
+  <div class="field">
+    <%= f.label :drivetrain %><br>
+    <%= f.text_field :drivetrain %>
+  </div>
+
   <div class="putinline">
       <%= f.fields_for :photos, @photo do |ff| %>
         <% if (ff.object.car_id).present? %>

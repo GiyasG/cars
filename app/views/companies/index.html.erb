@@ -7,10 +7,12 @@
  <h2>Cars</h2>
    <% @cars.each do |car| %>
    <%= content_tag :div, :id => "crs_#{car.id}", class: "col-md-2 col-sm-4" do %>
+   <%= link_to [@companies.where(:id => car.company_id)[0], car] do%>
             <%= image_tag url_for(:controller => "photos", :action => "show_car", :car_id=>car.id,
              :id=>car.photos[0][:id]), class: "img-fit img-thumbnail"%>
             <%= content_tag :h4, car.make%>
             <%= content_tag :h4, @companies.where(:id => car.company_id)[0].name%>
+            <% end %>
           <% end %>
   <% end %>
 
@@ -22,26 +24,27 @@
 </section>
 <hr class="panel">
 
-<div class="text-center shadow"><h2>Companies</h2></div>
+<div class="text-center shadow"><h2>Companies</h2>
+<% if user_signed_in? %>
+ <% if current_user.try(:vip?) %>
+ <span>
+   <%= link_to 'Add new Company', new_company_path, class: "btn btn-success" %>
+ </span>
+<% end %>
+<% end %>
+</div>
+
 <section class='row'>
 
-  <% if user_signed_in? %>
-   <% if current_user.try(:vip?) %>
-   <div class="col-md-12 putinline">
-     <%= link_to 'New Company', new_company_path, class: "btn btn-success" %>
-   </div>
-  <% end %>
-  <% end %>
-
     <% @companies.each do |company| %>
-    <%= content_tag :div, :id => "cmp_#{company.id}", class: "col-md-2 col-sm-4" do %>
+    <%= content_tag :div, :id => "cmp_#{company.id}", class: "col-md-2" do %>
         <%= link_to company, remote: true  do%>
              <%= image_tag url_for(:controller => "logos", :action => "show_company", :company_id=>company.id,
               :id=>company.logos[0][:id]), class: "img-fit img-thumbnail"%>
              <%= content_tag :h4, company.name%>
         <% end %>
           <% if user_signed_in? %>
-           <% if current_user.try(:vip?) %>
+           <% if current_user.try(:vip?) && current_user.id == company.user_id %>
              <%= link_to 'Edit', edit_company_path(company), class: "btn btn-warning" %>
              <%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
        <% end %>

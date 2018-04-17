@@ -25,12 +25,12 @@ class CarsController < ApplicationController
    # binding.pry
    @car = @company.cars.new(car_params)
    if @car.save
-     redirect_to @company, notice: "Car successfully added!"
+     redirect_to companies_path, notice: "Car successfully added!"
    else
      @car.errors.full_messages.each do |message|
        @notice_p = message
      end
-     redirect_to @company, alert: "Unable to add car - "+ @notice_p
+     redirect_to companies_path, alert: "Unable to add car - "+ @notice_p
    end
  end
 
@@ -39,9 +39,9 @@ class CarsController < ApplicationController
    authorize @company
      @car = @company.cars.find(params[:id])
      if @car.update_attributes(car_params) # @car.update
-       redirect_to @company, notice: "Car successfully updated!"
+       redirect_to companies_path, notice: "Car successfully updated!"
      else
-       redirect_to @company, alert: "Unable to update car!"
+       redirect_to companies_path, alert: "Unable to update car!"
      end
 
  end
@@ -51,7 +51,7 @@ class CarsController < ApplicationController
    authorize @company
    @car = @company.cars.find(params[:id])
    @car.destroy
-   redirect_to @company, notice: "Car deleted!"
+   redirect_to companies_path, notice: "Car deleted!"
  end
 
 

@@ -11,11 +11,7 @@ class CompanyPolicy < ApplicationPolicy
   end
 
   def edit?
-    @user.vip? or @record.user_id == @user.id
-  end
-
-  def edit?
-    @user.vip? or @record.user_id == @user.id
+    @user.vip? and @record.user_id == @user.id
   end
 
   def destroy?

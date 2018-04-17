@@ -24,7 +24,7 @@ class ApplicationPolicy
   end
 
   def update?
-    @user.vip? or @record.user_id == @user.id
+    @user.vip? and @record.user_id == @user.id
   end
 
   def edit?
