@@ -21,7 +21,7 @@
 
     <div class="field">
       <%= f.label :year %><br>
-      <%= f.date_select :year, :order => [:year] %>
+      <%= f.date_select :year, :order => [:year], :discard_day => true, :discard_month => true %>
     </div>
 
   <div class="field">
@@ -40,8 +40,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :type %><br>
-    <%= f.text_field :type %>
+    <%= f.label "Body type" %><br>
+    <%= f.text_field :bodytype %>
   </div>
 
   <div class="field">
@@ -50,8 +50,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :engineplace %><br>
-    <%= f.text_field :engineplace %>
+    <%= f.label :seat %><br>
+    <%= f.number_field :seat %>
   </div>
 
   <div class="field">

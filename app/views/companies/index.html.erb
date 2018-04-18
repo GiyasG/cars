@@ -4,7 +4,8 @@
 </section>
 <hr class="panel">
 <section>
- <h2>Cars</h2>
+  <div class="text-center shadow"><h2>Cars</h2>
+  </div>
    <% @cars.each do |car| %>
    <%= content_tag :div, :id => "crs_#{car.id}", class: "col-md-2 col-sm-4" do %>
    <%= link_to [@companies.where(:id => car.company_id)[0], car] do%>
@@ -12,6 +13,12 @@
              :id=>car.photos[0][:id]), class: "img-fit img-thumbnail"%>
             <%= content_tag :h4, car.make%>
             <%= content_tag :h4, @companies.where(:id => car.company_id)[0].name%>
+            <% end %>
+            <% if user_signed_in? %>
+             <% if (current_user.try(:vip?) && current_user.id == @companies.where(:id => car.company_id)[0].user_id) or current_user.try(:admin?) %>
+               <%= link_to 'Edit', edit_company_car_path(car.company_id, car.id), class: "btn btn-warning" %>
+               <%= link_to 'Destroy', company_car_path(car.company_id, car.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+             <% end %>
             <% end %>
           <% end %>
   <% end %>
@@ -36,7 +43,7 @@
 
 <section class='row'>
 
-    <% @companies.each do |company| %>
+<% @companies.each do |company| %>
     <%= content_tag :div, :id => "cmp_#{company.id}", class: "col-md-2" do %>
         <%= link_to company, remote: true  do%>
              <%= image_tag url_for(:controller => "logos", :action => "show_company", :company_id=>company.id,
@@ -44,12 +51,14 @@
              <%= content_tag :h4, company.name%>
         <% end %>
           <% if user_signed_in? %>
-           <% if current_user.try(:vip?) && current_user.id == company.user_id %>
+           <% if (current_user.try(:vip?) && current_user.id == company.user_id) or current_user.try(:admin?) %>
              <%= link_to 'Edit', edit_company_path(company), class: "btn btn-warning" %>
              <%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+             <%= link_to 'Add new car', new_company_car_path(company), class: "btn btn-success" %>
        <% end %>
      <% end %>
    <% end %>
-   <% end %>
+<% end %>
+
 </section>
 <hr class="panel">

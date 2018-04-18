@@ -1,0 +1,30 @@
+    <div class='row'>
+      <%= content_tag :h4, "#{@car.make}", class: "col-md-12"%>
+      <%= content_tag :h4, "#{@car.model}", class: "col-md-12"%>
+      <%= image_tag url_for(:controller => "photos", :action => "show_car", :car_id=>@car.id), class: "col-md-4 img-thumbnail"%>
+
+      <%= content_tag :table do%>
+
+      <%= content_tag :tr do%>
+      <%= content_tag :td, "Make year: #{@car.year.strftime("%Y")}", class: "col-md-4" %>
+      <%= content_tag :td, "Version: #{@car.version}", class: "col-md-4" %>
+      <% end%>
+
+      <%= content_tag :tr do%>
+      <%= content_tag :td, "Classification: #{@car.classification}", class: "col-md-4" %>
+      <%= content_tag :td, "Body type: #{@car.bodytype}", class: "col-md-4" %>
+      <% end%>
+
+      <%= content_tag :tr do%>
+      <%= content_tag :td, "Doors: #{@car.door}", class: "col-md-4" %>
+      <%= content_tag :td, "Seats: #{@car.seat}", class: "col-md-4" %>
+      <% end%>
+
+      <%= content_tag :tr do%>
+      <%= content_tag :td, "Engine place: #{@car.engineplace}", class: "col-md-4" %>
+      <%= content_tag :td, "Drivetrain: #{@car.drivetrain}", class: "col-md-4" %>
+      <% end%>
+
+      <% end%>
+
+    </div>

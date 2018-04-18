@@ -7,15 +7,15 @@ class CompanyPolicy < ApplicationPolicy
   end
 
   def new?
-    @user.vip?
+    @user.admin? or @user.vip?
   end
 
   def edit?
-    @user.vip? and @record.user_id == @user.id
+    (@user.vip? and @record.user_id == @user.id) or @user.admin?
   end
 
   def destroy?
-    @user.vip? or @record.user_id == @user.id
+    (@user.vip? and @record.user_id == @user.id) or @user.admin?
   end
 
 end
