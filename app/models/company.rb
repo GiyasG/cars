@@ -3,6 +3,7 @@ class Company < ActiveRecord::Base
   belongs_to :user
   has_many :logos, dependent: :destroy
   has_many :cars, dependent: :destroy
+  has_many :carparts, dependent: :destroy
 
   accepts_nested_attributes_for :logos
 

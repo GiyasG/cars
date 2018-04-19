@@ -1,16 +1,30 @@
-<%= link_to company, remote: true  do%>
-<div class="row well">
-<div class="col-md-2">
-     <%= image_tag url_for(:controller => "logos", :action => "show_company", :company_id=>@company.id,
-     :id=>@company.logos[0][:id]), class: "img-thumbnail"%>
-</div>
-<div class="col-md-10">
-            <h4><span><%= @company.name %></span></h4>
-            <h5>Contact person: <span><%= @company.contactname %></span></h5>
-            <h5>Address: <span><%= @company.street %>, <%= @company.city %>, <%= @company.postcode %>, <%= @company.country %></span></h5>
-            <h5>Contacts: <span><%= @company.phone %>, <%= mail_to @company.email %></span></h5>
-            <h5>Homepage: <span><%= link_to @company.homepage, @company.homepage, target: "_blank"%></span></h5>
-</div>
+<%= link_to company, remote: true, class: "companylink"  do%>
+<div class="row well-br">
+
+<%= content_tag :table, class: "table col-md-12" do%>
+
+  <%= content_tag :tr do%>
+  <%= content_tag :th, "Name:" %>
+  <%= content_tag :td, @company.name %>
+  <% end%>
+
+  <%= content_tag :tr do%>
+  <%= content_tag :th, "Contact person:" %>
+  <%= content_tag :td, @company.contactname %>
+  <%= content_tag :th, "Address:" %>
+  <%= content_tag :td, @company.street+", "+@company.city+", "+@company.postcode+", "+@company.country %>
+  <% end%>
+
+  <%= content_tag :tr do%>
+  <%= content_tag :th, "email:" %>
+  <%= content_tag :td, @company.email %>
+  <%= content_tag :th, "Hompage:"%>
+    <%= content_tag :td  do %>
+      <%= link_to @company.homepage, "http://"+@company.homepage, target: "_blank" %>
+    <% end%>
+  <% end%>
+<% end%>
+<hr>
 <div class="col-md-12">
     <%= simple_format(@company.description)%>
 </div>

@@ -1,17 +1,38 @@
     <div class='row'>
-      <%= content_tag :h4, "#{@car.make}", class: "col-md-12"%>
-      <%= content_tag :h4, "#{@car.model}", class: "col-md-12"%>
-      <%= image_tag url_for(:controller => "photos", :action => "show_car", :car_id=>@car.id), class: "col-md-4 img-thumbnail"%>
+      <%= content_tag :h4, "#{@car.make} #{@car.model}", class: "col-md-12"%>
+      <%= image_tag url_for(:controller => "photos", :action => "show_car", :car_id=>@car.id), class: "col-md-4"%>
 
-      <%= content_tag :h4, "Make year:", class: "col-md-4" do%>
-        <%= content_tag :span, "#{@car.year.strftime("%Y")}"%>
+    <div class='col-md-8'>
+      <%= content_tag :table, class: "table well-br" do%>
+
+      <%= content_tag :tr do%>
+      <%= content_tag :th, "Make year:" %>
+      <%= content_tag :td, "#{@car.year.strftime("%Y")}" %>
+      <%= content_tag :th, "Version:" %>
+      <%= content_tag :td, "#{@car.version}" %>
       <% end%>
-      <%= content_tag :h4, "Version: #{@car.version}", class: "col-md-4" %>
-      <%= content_tag :h4, "Classification: #{@car.classification}", class: "col-md-4" %>
-      <%= content_tag :h4, "Body type: #{@car.bodytype}", class: "col-md-4" %>
-      <%= content_tag :h4, "Doors: #{@car.door}", class: "col-md-4" %>
-      <%= content_tag :h4, "Seats: #{@car.seat}", class: "col-md-4" %>
-      <%= content_tag :h4, "Engine place: #{@car.engineplace}", class: "col-md-4" %>
-      <%= content_tag :h4, "Drivetrain: #{@car.drivetrain}", class: "col-md-4" %>
 
+      <%= content_tag :tr do%>
+      <%= content_tag :th, "Classification:" %>
+      <%= content_tag :td, "#{@car.classification}" %>
+      <%= content_tag :th, "Body type:" %>
+      <%= content_tag :td, "#{@car.bodytype}" %>
+      <% end%>
+
+      <%= content_tag :tr do%>
+      <%= content_tag :th, "Doors:" %>
+      <%= content_tag :td, "#{@car.door}" %>
+      <%= content_tag :th, "Seats:" %>
+      <%= content_tag :td, "#{@car.seat}" %>
+      <% end%>
+
+      <%= content_tag :tr do%>
+      <%= content_tag :th, "Engine place:" %>
+      <%= content_tag :td, "#{@car.engineplace}" %>
+      <%= content_tag :th, "Drivetrain:" %>
+      <%= content_tag :td, "#{@car.drivetrain}" %>
+      <% end%>
+
+      <% end%>
+    </div>
     </div>

@@ -1,0 +1,57 @@
+<%= form_for([@company, @car, @carpart]) do |f| %>
+  <% if @carpart.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@carpart.errors.count, "error") %> prohibited this carpart from being saved:</h2>
+
+      <ul>
+      <% @carpart.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :code %><br>
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :detail %><br>
+    <%= f.text_field :detail %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :stock %><br>
+    <%= f.number_field :stock %>
+  </div>
+  <div class="field">
+    <%= f.label :reserved %><br>
+    <%= f.number_field :reserved %>
+  </div>
+  <div class="field">
+    <%= f.label :reservedtime %><br>
+    <%= f.datetime_select :reservedtime %>
+  </div>
+  <div class="field">
+    <%= f.label :paidtime %><br>
+    <%= f.datetime_select :paidtime %>
+  </div>
+  <div class="field">
+    <%= f.label :sold %><br>
+    <%= f.number_field :sold %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

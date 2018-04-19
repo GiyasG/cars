@@ -11,7 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180418121005) do
+ActiveRecord::Schema.define(version: 20180419142156) do
+
+  create_table "carparts", force: :cascade do |t|
+    t.string   "name",           null: false
+    t.string   "code",           unique: true
+    t.string   "description"
+    t.string   "detail"
+    t.float    "price"
+    t.integer  "stock"
+    t.integer  "reserved"
+    t.datetime "reservedtime"
+    t.datetime "paidtime"
+    t.integer  "sold"
+    t.integer  "company_id"
+    t.integer  "car_id"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "carparts", ["car_id"], name: "index_carparts_on_car_id"
+  add_index "carparts", ["company_id"], name: "index_carparts_on_company_id"
+  add_index "carparts", ["user_id"], name: "index_carparts_on_user_id"
 
   create_table "cars", force: :cascade do |t|
     t.string   "make",           null: false
@@ -46,8 +68,10 @@ ActiveRecord::Schema.define(version: 20180418121005) do
     t.integer  "user_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "carpart_id"
   end
 
+  add_index "companies", ["carpart_id"], name: "index_companies_on_carpart_id"
   add_index "companies", ["name", "email"], name: "index_companies_on_name_and_email", unique: true
   add_index "companies", ["user_id"], name: "index_companies_on_user_id"
 

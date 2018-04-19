@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @carpart.name %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @carpart.code %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @carpart.description %>
+</p>
+
+<p>
+  <strong>Detail:</strong>
+  <%= @carpart.detail %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @carpart.price %>
+</p>
+
+<p>
+  <strong>Stock:</strong>
+  <%= @carpart.stock %>
+</p>
+
+<p>
+  <strong>Reserved:</strong>
+  <%= @carpart.reserved %>
+</p>
+
+<p>
+  <strong>Reservedtime:</strong>
+  <%= @carpart.reservedtime %>
+</p>
+
+<p>
+  <strong>Paidtime:</strong>
+  <%= @carpart.paidtime %>
+</p>
+
+<p>
+  <strong>Sold:</strong>
+  <%= @carpart.sold %>
+</p>
+
+<%= link_to 'Edit', edit_carpart_path(@carpart) %> |
+<%= link_to 'Back', carparts_path %>

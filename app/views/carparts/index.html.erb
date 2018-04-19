@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Carparts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Code</th>
+      <th>Description</th>
+      <th>Detail</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th>Reserved</th>
+      <th>Reservedtime</th>
+      <th>Paidtime</th>
+      <th>Sold</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @carparts.each do |carpart| %>
+      <tr>
+        <td><%= carpart.name %></td>
+        <td><%= carpart.code %></td>
+        <td><%= carpart.description %></td>
+        <td><%= carpart.detail %></td>
+        <td><%= carpart.price %></td>
+        <td><%= carpart.stock %></td>
+        <td><%= carpart.reserved %></td>
+        <td><%= carpart.reservedtime %></td>
+        <td><%= carpart.paidtime %></td>
+        <td><%= carpart.sold %></td>
+        <td><%= link_to 'Show', carpart %></td>
+        <td><%= link_to 'Edit', edit_carpart_path(carpart) %></td>
+        <td><%= link_to 'Destroy', carpart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Carpart', new_company_car_carpart_path %>

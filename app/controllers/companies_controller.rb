@@ -39,7 +39,7 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
 
     respond_to do |format|
-      if @company.save
+     if @company.save
         @company.user_id = current_user.id
         @company.save
         format.html { redirect_to companies_path, notice: 'Company was successfully created.' }

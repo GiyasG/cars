@@ -25,6 +25,13 @@ class PhotosController < ApplicationController
               filename: @photo.filename)
   end
 
+  def show_carpart
+    @photo = Photo.find_by(:carpart_id=>params[:carpart_id])
+    send_data(@photo.file_contents,
+              type: @photo.content_type,
+              filename: @photo.filename)
+  end
+
 
   # GET /photos/new
   def new
