@@ -23,10 +23,12 @@
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
-  <div class="field">
-    <%= f.label :detail %><br>
-    <%= f.text_field :detail %>
+
+  <%= link_to "Add detail", add_detail_path, remote:true %><br>
+
+  <div id="details" class="field">
   </div>
+
   <div class="field">
     <%= f.label :price %><br>
     <%= f.text_field :price %>
@@ -35,23 +37,40 @@
     <%= f.label :stock %><br>
     <%= f.number_field :stock %>
   </div>
-  <div class="field">
-    <%= f.label :reserved %><br>
-    <%= f.number_field :reserved %>
-  </div>
-  <div class="field">
-    <%= f.label :reservedtime %><br>
-    <%= f.datetime_select :reservedtime %>
-  </div>
-  <div class="field">
-    <%= f.label :paidtime %><br>
-    <%= f.datetime_select :paidtime %>
-  </div>
-  <div class="field">
-    <%= f.label :sold %><br>
-    <%= f.number_field :sold %>
-  </div>
+
+
+  <div class="putinline">
+      <%= f.fields_for :photos, @photo do |ff| %>
+        <% if (ff.object.carpart_id).present? %>
+        <h3 class="form-group col-md-12">Edit photo</h2>
+          <%= image_tag url_for(:controller => "photos", :action => "show_carpart",
+                                :carpart_id=>ff.object.carpart_id),
+                                 class: "col-md-2 img-thumbnail"%>
+          <div class="form-group col-md-6">
+            <p><%= ff.object.filename %></p>
+            <%= ff.file_field :file %><br>
+          </div>
+          <div class="form-group col-md-6">
+              <%= ff.label :description %>
+              <%= ff.text_field :description, :value => ff.object.description %>
+          </div>
+
+        <% else %>
+
+        <h3 class="form-group col-md-12">Add photo</h2>
+            <div class="form-group">
+              <%= ff.file_field :file, class: "btn btn-danger" %><br>
+            </div>
+            <div class="form-group">
+              <%= ff.label "Description" %>
+              <%= ff.text_field :description %>
+            </div>
+        <% end %>
+      <% end %>
+    </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Save", class: "btn btn-primary" %>
   </div>
+
 <% end %>

@@ -1,54 +1,33 @@
-<p id="notice"><%= notice %></p>
+  <div class='row'>
+    <%= content_tag :h4, "#{@carpart.name}", class: "col-md-12"%>
+    <%= image_tag url_for(:controller => "photos", :action => "show_carpart", :carpart_id=>@carpart.id), class: "col-md-4"%>
 
-<p>
-  <strong>Name:</strong>
-  <%= @carpart.name %>
-</p>
+  <div class='col-md-8'>
+    <%= content_tag :table, class: "table well-br" do%>
 
-<p>
-  <strong>Code:</strong>
-  <%= @carpart.code %>
-</p>
+    <%= content_tag :tr do%>
+    <%= content_tag :th, "Code:" %>
+    <%= content_tag :td, "#{@carpart.code}" %>
+    <%= content_tag :th, "Description:" %>
+    <%= content_tag :td, "#{@carpart.description}" %>
+    <% end%>
 
-<p>
-  <strong>Description:</strong>
-  <%= @carpart.description %>
-</p>
+    <%= content_tag :tr do%>
+    <%= content_tag :th, "Deatails:" %>
+    <% @carpart.detail.each do |key, value| %>
+      <%= content_tag :td, "#{key}: #{value}"  %>
+    <% end %>
+    <%= content_tag :th, "Price:" %>
+    <%= content_tag :td, "#{@carpart.price}" %>
+    <% end%>
 
-<p>
-  <strong>Detail:</strong>
-  <%= @carpart.detail %>
-</p>
+    <%= content_tag :tr do%>
+    <%= content_tag :th, "Stock:" %>
+    <%= content_tag :td, "#{@carpart.stock}" %>
+    <% end%>
 
-<p>
-  <strong>Price:</strong>
-  <%= @carpart.price %>
-</p>
-
-<p>
-  <strong>Stock:</strong>
-  <%= @carpart.stock %>
-</p>
-
-<p>
-  <strong>Reserved:</strong>
-  <%= @carpart.reserved %>
-</p>
-
-<p>
-  <strong>Reservedtime:</strong>
-  <%= @carpart.reservedtime %>
-</p>
-
-<p>
-  <strong>Paidtime:</strong>
-  <%= @carpart.paidtime %>
-</p>
-
-<p>
-  <strong>Sold:</strong>
-  <%= @carpart.sold %>
-</p>
-
-<%= link_to 'Edit', edit_carpart_path(@carpart) %> |
-<%= link_to 'Back', carparts_path %>
+    <% end%>
+  </div>
+  </div>
+<!-- link_to 'Edit', edit_company_car_carpart_path(@carpart) -->
+<%= link_to 'Back', company_car_carparts_path %>

@@ -27,7 +27,26 @@
 </section>
 <hr class="panel">
 <section>
- <div class="text-center shadow"><h2>Car parts</h2></div>
+ <div class="text-center"><h2>Car parts</h2>
+
+   <% @carparts.each do |carpart| %>
+   <%= content_tag :div, id: "cpt_#{carpart.id}", class: "col-md-2 col-sm-4" do %>
+      <%= link_to company_car_carpart_path(carpart.company_id, carpart.car_id, carpart.id)  do%>
+            <%= image_tag url_for(:controller => "photos", :action => "show_carpart", :carpart_id=>carpart.id,
+             :id=>carpart.photos[0][:id]), class: "img-fit"%>
+            <%= content_tag :h4, carpart.name%>
+            <%= content_tag :h4, @companies.where(:id => carpart.company_id)[0].name%>
+      <% end %>
+            <% if user_signed_in? %>
+             <% if (current_user.try(:vip?) && current_user.id == @companies.where(:id => carpart.company_id)[0].user_id) or current_user.try(:admin?) %>
+               <%= link_to 'Edit', edit_company_car_carpart_path(carpart.company_id, carpart.car_id, carpart.id), class: "btn btn-warning" %>
+               <%= link_to 'Destroy', company_car_carpart_path(carpart.company_id, carpart.car_id, carpart.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+             <% end %>
+            <% end %>
+          <% end %>
+  <% end %>
+
+ </div>
 </section>
 <hr class="panel">
 

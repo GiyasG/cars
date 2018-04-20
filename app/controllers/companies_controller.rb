@@ -10,6 +10,7 @@ class CompaniesController < ApplicationController
   def index
     @companies = Company.all
     @cars = Car.all
+    @carparts = Carpart.all
     authorize @companies
   end
 
