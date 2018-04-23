@@ -13,10 +13,6 @@
     <% end%>
 
     <%= content_tag :tr do%>
-    <%= content_tag :th, "Deatails:" %>
-    <% @carpart.detail.each do |key, value| %>
-      <%= content_tag :td, "#{key}: #{value}"  %>
-    <% end %>
     <%= content_tag :th, "Price:" %>
     <%= content_tag :td, "#{@carpart.price}" %>
     <% end%>
@@ -26,8 +22,15 @@
     <%= content_tag :td, "#{@carpart.stock}" %>
     <% end%>
 
-    <% end%>
-  </div>
+    <%= content_tag :tr do%>
+    <% @carpart.detail.to_h.each do |key, value| %>
+      <%= content_tag :th, "#{key}:" %>
+      <%= content_tag :td, "#{value}"  %>
+    <% end %>
+  <% end%>
+<% end%>
+</div>
+
   </div>
 <!-- link_to 'Edit', edit_company_car_carpart_path(@carpart) -->
 <%= link_to 'Back', company_car_carparts_path %>

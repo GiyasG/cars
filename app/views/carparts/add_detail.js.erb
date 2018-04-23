@@ -1,1 +1,1 @@
-$("#details").append("<div class='field'><label>Detail 1</label><input type='text' name='carpart[detail]'' id='carpart_detail'></div>");
+$("#details").append("<%= escape_javascript(render partial: 'carparts/add_detail', locals: { car: @car } ) %>");

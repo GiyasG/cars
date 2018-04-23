@@ -1,8 +1,10 @@
 class CarpartsController < ApplicationController
-  before_action :set_car, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+  before_action :set_car, only: [:add_detail,:new, :create, :index, :show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   after_action :verify_authorized, only: [:new, :edit, :update, :destroy]
   before_filter :edit_carpart_params, :only => [:update]
+  before_filter :check_details, :only => [:create, :update]
+
 
 
   def index
@@ -50,7 +52,6 @@ class CarpartsController < ApplicationController
  def update
    @company = Company.find(params[:company_id])
    @carpart = @car.carparts.find(params[:id])
-   binding.pry
    authorize @company
      if @carpart.update_attributes(carpart_params) # @carparts.update
        redirect_to companies_path, notice: "Part successfully updated!"
@@ -87,17 +88,23 @@ class CarpartsController < ApplicationController
   end
 
   def add_detail
+    @company = Company.find(params[:company_id])
     respond_to do |format|
 	     format.js {render layout: false}
 	  end
   end
+
+  def check_details
+    binding.pry
+    carpart_params[:detail] = params[:carpart][:detail]
+  end
+
 
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_car
       @car = Car.find(params[:car_id])
-      # @car = Car.find(params[:car_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
