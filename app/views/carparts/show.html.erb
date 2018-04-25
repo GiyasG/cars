@@ -23,11 +23,13 @@
     <% end%>
 
     <%= content_tag :tr do%>
-    <% @carpart.detail.to_h.each do |key, value| %>
-      <%= content_tag :th, "#{key}:" %>
-      <%= content_tag :td, "#{value}"  %>
+        <% @carpart.details.to_h.each do |key, value| %>
+          <%= content_tag :th, "#{key}:" %>
+          <%= content_tag :td, "#{value}"  %>
+        <% end %>
     <% end %>
-  <% end%>
+
+
 <% end%>
 </div>
 

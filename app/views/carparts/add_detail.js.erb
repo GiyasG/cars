@@ -1,1 +1,1 @@
-$("#details").append("<%= escape_javascript(render partial: 'carparts/add_detail', locals: { car: @car } ) %>");
+$("#details").append("<%= escape_javascript(render partial: 'carparts/add_detail', locals: { car: @car, nof: @number_of_details } ) %>");

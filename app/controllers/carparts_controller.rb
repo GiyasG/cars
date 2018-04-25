@@ -1,9 +1,10 @@
 class CarpartsController < ApplicationController
   before_action :set_car, only: [:add_detail,:new, :create, :index, :show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
+  before_action :set_number_of_details
   after_action :verify_authorized, only: [:new, :edit, :update, :destroy]
   before_filter :edit_carpart_params, :only => [:update]
-  before_filter :check_details, :only => [:create, :update]
+  after_filter :check_details, :only => [:create, :update]
 
 
 
@@ -96,11 +97,21 @@ class CarpartsController < ApplicationController
 
   def check_details
     binding.pry
-    carpart_params[:detail] = params[:carpart][:detail]
+    @carpart = Carpart.last
+    if params[:carpart][:detail1].present?
+      @carpart.details = OpenStruct.new(params[:carpart][:detail1] => params[:carpart][:detail2])
+      @carpart.save
+    end
   end
 
+  def set_number_of_details
+    @number_of_details = 0
+  end
 
-
+  def add_number_of_details
+    @number_of_details = @number_of_details + 1
+    binding.pry
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_car
@@ -109,7 +120,7 @@ class CarpartsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def carpart_params
-      params.require(:carpart).permit(:name, :code, :description, :detail, :price,
+      params.require(:carpart).permit(:name, :code, :description, :details, :price,
                                       :stock, :reserved, :reservedtime, :paidtime, :sold,
                                        photos_attributes: [:file, :description, :id])
     end

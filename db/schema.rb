@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180419142156) do
+ActiveRecord::Schema.define(version: 20180424132808) do
 
   create_table "carparts", force: :cascade do |t|
-    t.string   "name",           null: false
-    t.string   "code",           unique: true
+    t.string   "name"
+    t.string   "code"
     t.string   "description"
-    t.string   "detail"
+    t.text     "details"
     t.float    "price"
     t.integer  "stock"
     t.integer  "reserved"
