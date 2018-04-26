@@ -25,6 +25,7 @@
     <%= f.text_field :description %>
   </div>
 
+  <%= select_tag "details_number", options_for_select((1..10).step(1)) %>
   <%= link_to "Add detail", add_detail_path, remote:true %><br>
 
   <div id="details" class="field">

@@ -1,10 +1,9 @@
 class CarpartsController < ApplicationController
   before_action :set_car, only: [:add_detail,:new, :create, :index, :show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
-  before_action :set_number_of_details
-  after_action :verify_authorized, only: [:new, :edit, :update, :destroy]
+  after_action  :verify_authorized, only: [:new, :edit, :update, :destroy]
   before_filter :edit_carpart_params, :only => [:update]
-  after_filter :check_details, :only => [:create, :update]
+  after_filter  :check_details, :only => [:create, :update]
 
 
 
@@ -75,10 +74,7 @@ class CarpartsController < ApplicationController
   def edit_carpart_params
     @company = Company.find(params[:company_id])
     @carpart = @car.carparts.find(params[:id])
-    # @company = Company.find(params[:company_id])
-    # authorize @company
     if carpart_params[:photos_attributes][:"0"][:file].present?
-      # binding.pry
       @photo = @carpart.photos.find(carpart_params[:photos_attributes][:"0"][:id])
       @photo.filename = carpart_params[:photos_attributes][:"0"][:file].original_filename
       @photo.content_type = carpart_params[:photos_attributes][:"0"][:file].content_type
@@ -96,22 +92,25 @@ class CarpartsController < ApplicationController
   end
 
   def check_details
-    binding.pry
     @carpart = Carpart.last
-    if params[:carpart][:detail1].present?
-      @carpart.details = OpenStruct.new(params[:carpart][:detail1] => params[:carpart][:detail2])
-      @carpart.save
+    if params[:carpart].length > 10
+      binding.pry
+      (1..(params[:carpart].length)-10).each do |i|
+        binding.pry
+        @string1 = :detail+"#{i}"
+        @string2 = :detailname+"#{i}"
+        @carpart.details = OpenStruct.new(params[:carpart][@string1] => params[:carpart][@string2])
+        @carpart.save
+      end
     end
+
+    # params[:carpart].scan(/detail/).each do |key, value|
+    #   @carpart.details = OpenStruct.new(key => value)
+    #   binding.pry
+    # end
+    # @carpart.save
   end
 
-  def set_number_of_details
-    @number_of_details = 0
-  end
-
-  def add_number_of_details
-    @number_of_details = @number_of_details + 1
-    binding.pry
-  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_car
