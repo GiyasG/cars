@@ -22,15 +22,19 @@
     <%= content_tag :td, "#{@carpart.stock}" %>
     <% end%>
 
-    <%= content_tag :tr do%>
-        <% @carpart.details.to_h.each do |key, value| %>
-          <%= content_tag :th, "#{key}:" %>
-          <%= content_tag :td, "#{value}"  %>
-        <% end %>
-    <% end %>
-
-
 <% end%>
+<% content_tag :h3, "Characteristics"%>
+<%= content_tag :table, class: "table well-br" do%>
+<%= content_tag :tr do%>
+<% (0...(@carpart.details[0]).size()).each do |i| %>
+    <% @carpart.details[0][i].each do |key, value| %>
+      <%= content_tag :th, "#{key}:" %>
+      <%= content_tag :td, "#{value}"  %>
+    <% end %>
+  <% end %>
+<% end %>
+<% end %>
+
 </div>
 
   </div>

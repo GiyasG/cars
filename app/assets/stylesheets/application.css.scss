@@ -191,3 +191,9 @@ h5 span {
 a:hover.companylink {
   text-decoration: none;
 }
+
+input[readonly]{
+  background-color:transparent;
+  border: 0;
+  font-size: 1em;
+}

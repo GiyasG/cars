@@ -1,6 +1,6 @@
 class Carpart < ActiveRecord::Base
 
-  serialize :details, OpenStruct
+  serialize :details, Array
   belongs_to :company
   belongs_to :car
   belongs_to :user

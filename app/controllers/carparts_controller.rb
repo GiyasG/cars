@@ -3,8 +3,6 @@ class CarpartsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   after_action  :verify_authorized, only: [:new, :edit, :update, :destroy]
   before_filter :edit_carpart_params, :only => [:update]
-  after_filter  :check_details, :only => [:create, :update]
-
 
 
   def index
@@ -38,6 +36,21 @@ class CarpartsController < ApplicationController
    @carpart = @car.carparts.new(carpart_params)
    if @carpart.save
      @carpart.company_id = @company.id
+     @n = []
+     @m = []
+     @z = []
+     params[:carpart].each do |key, value|
+       if key.include?("detailname")
+         @n << value
+       elsif key.include?("detail")
+         @m << value
+       end
+     end
+
+       (0...@n.size()).each do |i|
+         @z.push(@n[i] => @m[i])
+       end
+       @carpart.details << @z
      @carpart.save
      redirect_to companies_path, notice: "Part successfully added!"
    else
@@ -53,6 +66,24 @@ class CarpartsController < ApplicationController
    @company = Company.find(params[:company_id])
    @carpart = @car.carparts.find(params[:id])
    authorize @company
+   @n = []
+   @m = []
+   @z = []
+   params[:carpart].each do |key, value|
+     if key.include?("detailname")
+       @n << value
+     elsif key.include?("detail")
+       @m << value
+     end
+   end
+
+     (0...@n.size()).each do |i|
+       @z.push(@n[i] => @m[i])
+     end
+     @carpart.details.clear
+     @carpart.details << @z
+     @carpart.save
+   binding.pry
      if @carpart.update_attributes(carpart_params) # @carparts.update
        redirect_to companies_path, notice: "Part successfully updated!"
      else
@@ -89,26 +120,6 @@ class CarpartsController < ApplicationController
     respond_to do |format|
 	     format.js {render layout: false}
 	  end
-  end
-
-  def check_details
-    @carpart = Carpart.last
-    if params[:carpart].length > 10
-      binding.pry
-      (1..(params[:carpart].length)-10).each do |i|
-        binding.pry
-        @string1 = :detail+"#{i}"
-        @string2 = :detailname+"#{i}"
-        @carpart.details = OpenStruct.new(params[:carpart][@string1] => params[:carpart][@string2])
-        @carpart.save
-      end
-    end
-
-    # params[:carpart].scan(/detail/).each do |key, value|
-    #   @carpart.details = OpenStruct.new(key => value)
-    #   binding.pry
-    # end
-    # @carpart.save
   end
 
   private

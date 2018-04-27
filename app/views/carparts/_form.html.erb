@@ -12,34 +12,45 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label "Name:", class: "col-md-1" %>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :code %><br>
+    <%= f.label "Code:", class: "col-md-1" %>
     <%= f.text_field :code %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label "Description:", class: "col-md-1" %>
     <%= f.text_field :description %>
   </div>
 
-  <%= select_tag "details_number", options_for_select((1..10).step(1)) %>
-  <%= link_to "Add detail", add_detail_path, remote:true %><br>
-
-  <div id="details" class="field">
-  </div>
-
   <div class="field">
-    <%= f.label :price %><br>
+    <%= f.label "Price:", class: "col-md-1" %>
     <%= f.text_field :price %>
   </div>
   <div class="field">
-    <%= f.label :stock %><br>
+    <%= f.label "Stock:", class: "col-md-1" %>
     <%= f.number_field :stock %>
   </div>
 
+  <br>
+  <% if @carpart.details.present? %>
+  <%= content_tag :h4, "Characteristics"%>
+  <% (0...(@carpart.details[0]).size()).each do |i| %>
+      <% @carpart.details[0][i].each do |key, value| %>
+      <div class="field">
+        <%= f.text_field :details, :value => "#{key}", class: "col-md-1", name: "carpart[detailname#{i}]", id: "carpart_detailname#{i}", :readonly => true %>
+        <%= f.text_field :details, :value => "#{value}", name: "carpart[detail#{i}]", id: "carpart_detail#{i}" %>
+      </div>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= link_to "Add detail", add_detail_path, remote:true %><br>
+  <% end %>
+  <br>
+  <div id="details" class="field">
+  </div>
 
   <div class="putinline">
       <%= f.fields_for :photos, @photo do |ff| %>

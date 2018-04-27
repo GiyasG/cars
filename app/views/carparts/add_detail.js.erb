@@ -5,5 +5,5 @@ if ($("#carpart_detail0").length) {
   $("#carpart_detailname0").attr("id", "carpart_detailname"+n)
   $("#carpart_detailname"+n).attr("name", "carpart[detailname"+n+"]")
 }
-alert($("#details").children().length)
+// alert($("#details").children().length)
 $("#details").append("<%= escape_javascript(render partial: 'carparts/add_detail', locals: { car: @car, nof: @number_of_details } ) %>");
