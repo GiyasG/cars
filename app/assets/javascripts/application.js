@@ -16,3 +16,14 @@
 //= require bootstrap-sprockets
 //= require tinymce
 //= require_tree .
+
+$(function() {
+    $("select#date_year").on("change", function() {
+        $.ajax({
+            url:  "search_make",
+            type: "GET",
+            data: { selected_year: $("select#date_year").val() }
+        });
+        $("div#makeit").html("<%= escape_javascript(render partial: 'cars/search_make', locals: { makes: @makes } ) %>");
+    });
+});

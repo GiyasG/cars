@@ -1,33 +1,30 @@
 <section>
  <div class="text-center shadow"><h2>Search area</h2></div>
- <%= render 'layouts/search' %>
-</section>
-<hr class="panel">
-<section>
-  <div class="text-center shadow"><h2>Cars</h2>
-  </div>
-   <% @cars.each do |car| %>
-   <%= content_tag :div, :id => "crs_#{car.id}", class: "col-md-2 col-sm-4" do %>
-   <%= link_to [@companies.where(:id => car.company_id)[0], car] do%>
-            <%= image_tag url_for(:controller => "photos", :action => "show_car", :car_id=>car.id,
-             :id=>car.photos[0][:id]), class: "img-fit"%>
-            <%= content_tag :h4, car.make%>
-            <%= content_tag :h4, @companies.where(:id => car.company_id)[0].name%>
-            <% end %>
-            <% if user_signed_in? %>
-             <% if (current_user.try(:vip?) && current_user.id == @companies.where(:id => car.company_id)[0].user_id) or current_user.try(:admin?) %>
-               <%= link_to 'Edit', edit_company_car_path(car.company_id, car.id), class: "btn btn-warning" %>
-               <%= link_to 'Destroy', company_car_path(car.company_id, car.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-             <% end %>
-            <% end %>
-          <% end %>
-  <% end %>
+
+ <div class="row">
+   <label>Select year</label>
+   <%=  select_year(Date.today, start_year: 1992, end_year: 2018) %>
+   <br>
+
+   <label>Select make</label>
+   <%= content_tag :div, id: "makeit" do %>
+   <%= select_tag 'Make', options_from_collection_for_select(@cars, 'id', 'make'), include_blank: true, disabled: true  %>
+   <% end %>
+   <br>
+   <label>Select model</label>
+   <%= select_tag 'Model', options_from_collection_for_select(@carparts, 'id', 'name'), include_blank: true  %>
+   <br>
+   <label>Select part</label>
+   <%= select_tag 'Part', options_from_collection_for_select(@carparts, 'id', 'name'), include_blank: true  %>
+   <br>
+ </div>
 
 
 </section>
+
 <hr class="panel">
 <section>
- <div class="text-center"><h2>Car parts</h2>
+ <div class="text-center shadow"><h2>Car parts</h2>
 
    <% @carparts.each do |carpart| %>
    <%= content_tag :div, id: "cpt_#{carpart.id}", class: "col-md-2 col-sm-4" do %>
@@ -48,8 +45,31 @@
 
  </div>
 </section>
-<hr class="panel">
 
+<hr class="panel">
+<section>
+  <div class="text-center shadow"><h2>Cars</h2>
+  </div>
+   <% @cars.each do |car| %>
+   <%= content_tag :div, :id => "crs_#{car.id}", class: "col-md-2 col-sm-4" do %>
+   <%= link_to [@companies.where(:id => car.company_id)[0], car] do%>
+            <%= image_tag url_for(:controller => "photos", :action => "show_car", :car_id=>car.id,
+             :id=>car.photos[0][:id]), class: "img-fit"%>
+            <%= content_tag :h4, car.make%>
+            <%= content_tag :h4, @companies.where(:id => car.company_id)[0].name%>
+            <% end %>
+            <% if user_signed_in? %>
+             <% if (current_user.try(:vip?) && current_user.id == @companies.where(:id => car.company_id)[0].user_id) or current_user.try(:admin?) %>
+               <%= link_to 'Edit', edit_company_car_path(car.company_id, car.id), class: "btn btn-warning" %>
+               <%= link_to 'Destroy', company_car_path(car.company_id, car.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+               <%= link_to 'Add new car part', new_company_car_carpart_path(car.company_id, car.id), class: "btn btn-success" %>
+             <% end %>
+            <% end %>
+          <% end %>
+  <% end %>
+</section>
+
+<hr class="panel">
 <div class="text-center shadow"><h2>Companies</h2>
 <% if user_signed_in? %>
  <% if current_user.try(:vip?) %>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   match 'show_carpart/:carpart_id' => 'photos#show_carpart', as: :show_carpart, via: [:get]
 
   match 'add_detail/:company_id/:car_id' => 'carparts#add_detail', as: :add_detail, via: [:get]
+  match 'search_make/' => 'cars#search_make', as: :search_make, via: [:get]
 
   devise_for :users
   resources :users

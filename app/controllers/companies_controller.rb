@@ -11,6 +11,7 @@ class CompaniesController < ApplicationController
     @companies = Company.all
     @cars = Car.all
     @carparts = Carpart.all
+    # @makes=""
     authorize @companies
   end
 

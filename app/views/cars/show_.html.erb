@@ -4,7 +4,7 @@
       <%= image_tag url_for(:controller => "photos", :action => "show_car", :car_id=>@car.id), class: "col-md-4 img-thumbnail"%>
 
       <%= content_tag :h4, "Make year:", class: "col-md-2"%>
-      <%= content_tag :h4, "#{@car.year.strftime("%Y")}", class: "col-md-1"%>
+      <%= content_tag :h4, "#{@car.makeyear}", class: "col-md-1"%>
       <%= content_tag :h4, "Version:", class: "col-md-2" %>
       <%= content_tag :h4, "#{@car.version}", class: "col-md-1" %>
       <%= content_tag :h4, "Classification: #{@car.classification}", class: "col-md-4" %>
