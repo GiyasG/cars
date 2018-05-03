@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   match 'add_detail/:company_id/:car_id' => 'carparts#add_detail', as: :add_detail, via: [:get]
   match 'search_make/' => 'cars#search_make', as: :search_make, via: [:get]
+  match 'search_model/' => 'cars#search_model', as: :search_model, via: [:get]
+  match 'search_part/' => 'carparts#search_part', as: :search_part, via: [:get]
 
   devise_for :users
   resources :users

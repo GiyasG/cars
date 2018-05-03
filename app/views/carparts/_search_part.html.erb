@@ -1,0 +1,2 @@
+<label>Select part</label>
+<%= select_tag 'part', options_from_collection_for_select(@carparts, 'id', 'name'), prompt: "Choose part", disabled: false  %>

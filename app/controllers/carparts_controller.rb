@@ -122,6 +122,14 @@ class CarpartsController < ApplicationController
 	  end
   end
 
+  def search_part
+    @carparts = Carpart.where('car_id = ?', params[:selected_part])
+    respond_to do |format|
+       format.html {render partial: "search_part"}
+    end
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_car

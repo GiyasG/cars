@@ -3,19 +3,23 @@
 
  <div class="row">
    <label>Select year</label>
-   <%=  select_year(Date.today, start_year: 1992, end_year: 2018) %>
+   <%= select_tag 'makeyear', options_for_select(@makeyears, 'makeyear'), include_blank: true, disabled: false  %>
    <br>
 
-   <label>Select make</label>
    <%= content_tag :div, id: "makeit" do %>
-   <%= select_tag 'Make', options_from_collection_for_select(@cars, 'id', 'make'), include_blank: true, disabled: true  %>
+   <label>Select make</label>
+   <%= select_tag 'make', options_from_collection_for_select(@cars, 'make', 'make'), include_blank: true, disabled: true  %>
    <% end %>
    <br>
+   <%= content_tag :div, id: "modelit" do %>
    <label>Select model</label>
-   <%= select_tag 'Model', options_from_collection_for_select(@carparts, 'id', 'name'), include_blank: true  %>
+   <%= select_tag 'model', options_from_collection_for_select(@cars, 'model', 'model'), include_blank: true, disabled: true  %>
+   <% end %>
    <br>
+   <%= content_tag :div, id: "partit" do %>
    <label>Select part</label>
-   <%= select_tag 'Part', options_from_collection_for_select(@carparts, 'id', 'name'), include_blank: true  %>
+   <%= select_tag 'part', options_from_collection_for_select(@carparts, 'id', 'name'), include_blank: true  %>
+   <% end %>
    <br>
  </div>
 

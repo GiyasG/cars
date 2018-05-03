@@ -68,13 +68,20 @@ class CarsController < ApplicationController
   end
 
   def search_make
-    # binding.pry
-    @makes = Car.where('makeyear = ?', params[:selected_year])
+    @makes = Car.uniq.where('makeyear = ?', params[:selected_year])
+    @makes = @makes.uniq.pluck(:make)
     respond_to do |format|
-	     format.js {render layout: false}
+	     format.html {render partial: "search_make"}
 	  end
   end
 
+  def search_model
+    @models = Car.where('make = ?', params[:selected_model])
+    @models = @models.uniq.pluck(:model, :id)
+    respond_to do |format|
+	     format.html {render partial: "search_model"}
+	  end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

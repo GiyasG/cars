@@ -11,7 +11,7 @@ class CompaniesController < ApplicationController
     @companies = Company.all
     @cars = Car.all
     @carparts = Carpart.all
-    # @makes=""
+    @makeyears = Car.uniq.pluck(:makeyear)
     authorize @companies
   end
 
