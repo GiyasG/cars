@@ -83,7 +83,7 @@ class CarpartsController < ApplicationController
      @carpart.details.clear
      @carpart.details << @z
      @carpart.save
-   binding.pry
+   # binding.pry
      if @carpart.update_attributes(carpart_params) # @carparts.update
        redirect_to companies_path, notice: "Part successfully updated!"
      else
@@ -139,6 +139,22 @@ class CarpartsController < ApplicationController
     end
   end
 
+  def search_final
+    case
+    when [params[:makeyear].nil?, params[:make].nil?, params[:model].nil?, params[:part].nil?]
+      redirect_to companies_path, alert: "Unable to find year!"
+    when [params[:makeyear].present?, params[:make].nil?, params[:model].nil?, params[:part].nil?]
+      redirect_to companies_path, alert: "Unable to find make!"
+    when [params[:makeyear].present?, params[:make].present?, params[:model].nil?, params[:part].nil?]
+      redirect_to companies_path, alert: "Unable to find model!"
+    when [params[:makeyear].present?, params[:make].present?, params[:model].present?, params[:part].nil?]
+      redirect_to companies_path, alert: "Unable to find part!"
+    when params[:part].present?
+      @carpart = Carpart.find_by(params[:part])
+    else
+        redirect_to companies_path, alert: "Unable to find part!"
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

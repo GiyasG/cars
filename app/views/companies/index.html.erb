@@ -1,7 +1,8 @@
 <section>
  <div class="text-center shadow"><h2>Search area</h2></div>
-
  <div class="row">
+   <div class="col-md-4">
+<%= form_for :search_final, url: search_final_path do |form| %>
    <label>Select year</label>
    <%= select_tag 'makeyear', options_for_select(@makeyears, 'makeyear'), include_blank: true, disabled: false  %>
    <br>
@@ -21,7 +22,14 @@
    <%= select_tag 'part', options_from_collection_for_select(@carparts, 'id', 'name'), include_blank: true, disabled: true  %>
    <% end %>
    <br>
- </div>
+    <%= form.submit "Search", class: "btn btn-primary", id: "search_p"  %>
+ <% end %>
+</div>
+<div class="col-md-8">
+  <%= image_tag("mers.jpg")  %>
+</div>
+
+</div>
 
 
 </section>

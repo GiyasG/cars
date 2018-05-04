@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   match 'search_make/' => 'cars#search_make', as: :search_make, via: [:get]
   match 'search_model/' => 'cars#search_model', as: :search_model, via: [:get]
   match 'search_part/' => 'carparts#search_part', as: :search_part, via: [:get]
+  match 'search_final/' => 'carparts#search_final', as: :search_final, via: [:post]
 
   devise_for :users
   resources :users

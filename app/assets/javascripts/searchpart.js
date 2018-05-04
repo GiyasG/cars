@@ -7,8 +7,10 @@ var ready = function() {
             success: function(response, status) {
               if (response != "") {
                 console.log(response);
-                $("div#partit").html(response); }
-              }
+                $("div#partit").html(response);
+                $("input#search_p").prop('disabled', false)
+             }
+          }
         });
     });
 };
