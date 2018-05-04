@@ -15,6 +15,4 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require tinymce
-//= require searchmake
-//= require searchmodel
 //= require_tree .

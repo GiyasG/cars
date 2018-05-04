@@ -1,6 +1,5 @@
 var ready = function() {
   $(document).on("change", "select#make", function () {
-    // $("select#date_year").on("change", function() {
         $.ajax({
             url:  "search_model",
             type: "GET",

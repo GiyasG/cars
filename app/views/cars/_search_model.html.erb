@@ -1,2 +1,6 @@
 <label>Select model</label>
-<%= select_tag 'model', options_for_select(@models, 'model'), prompt: "Choose model", disabled: false  %>
+<% if @models.present? %>
+  <%= select_tag 'model', options_for_select(@models, 'model'), prompt: "Choose model", disabled: false  %>
+<% else %>
+  <%= select_tag "model", "<option>Not found</option>".html_safe, disabled: true %>
+<% end %>

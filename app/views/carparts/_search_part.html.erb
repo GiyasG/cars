@@ -1,2 +1,6 @@
 <label>Select part</label>
-<%= select_tag 'part', options_from_collection_for_select(@carparts, 'id', 'name'), prompt: "Choose part", disabled: false  %>
+<% if @foundparts.present? %>
+ <%= select_tag 'part', options_for_select(@foundparts, 'name'), prompt: "Choose model", disabled: false %>
+<% else %>
+ <%= select_tag "part", "<option>Not found</option>".html_safe, disabled: true %>
+<% end %>

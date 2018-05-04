@@ -18,7 +18,7 @@
    <br>
    <%= content_tag :div, id: "partit" do %>
    <label>Select part</label>
-   <%= select_tag 'part', options_from_collection_for_select(@carparts, 'id', 'name'), include_blank: true  %>
+   <%= select_tag 'part', options_from_collection_for_select(@carparts, 'id', 'name'), include_blank: true, disabled: true  %>
    <% end %>
    <br>
  </div>

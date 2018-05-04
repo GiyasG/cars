@@ -123,7 +123,17 @@ class CarpartsController < ApplicationController
   end
 
   def search_part
-    @carparts = Carpart.where('car_id = ?', params[:selected_part])
+    @cars = Car.where('model = ?', params[:selected_part])
+    @foundpart = {}
+    @cars.each do |car|
+      @carparts = Carpart.where('car_id = ?', car.id )
+      if @carparts.present?
+        @carparts.each do |carpart|
+          @foundpart[carpart.name] = carpart.id
+        end
+      end
+      @foundparts = @foundpart.to_a if @foundpart.present?
+    end
     respond_to do |format|
        format.html {render partial: "search_part"}
     end

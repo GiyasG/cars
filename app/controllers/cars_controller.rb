@@ -77,7 +77,9 @@ class CarsController < ApplicationController
 
   def search_model
     @models = Car.where('make = ?', params[:selected_model])
-    @models = @models.uniq.pluck(:model, :id)
+    # @models = @models.uniq.pluck(:model, :id)
+    # binding.pry
+    @models = @models.uniq.pluck(:model)
     respond_to do |format|
 	     format.html {render partial: "search_model"}
 	  end

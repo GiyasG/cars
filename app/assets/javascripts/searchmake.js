@@ -6,7 +6,10 @@ $(document).on("change", "select#makeyear", function () {
           data: { selected_year: $("select#makeyear").val()},
           success: function(response, status) {
             if (response != "") {
-              $("div#makeit").html(response); }
+              $("div#makeit").html(response);
+              $("select#model").html("<option>Choose model</option>");
+              $("select#part").html("<option>Choose model</option>");
+             }
             }
       });
   });
