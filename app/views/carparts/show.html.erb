@@ -1,42 +1,50 @@
-  <div class='row'>
+<div class='row'>
     <%= content_tag :h4, "#{@carpart.name}", class: "col-md-12"%>
     <%= image_tag url_for(:controller => "photos", :action => "show_carpart", :carpart_id=>@carpart.id), class: "col-md-4"%>
 
-  <div class='col-md-8'>
-    <%= content_tag :table, class: "table well-br" do%>
+<div class='col-md-8  well-br'>
+  <%= content_tag :table, class: "table" do%>
 
-    <%= content_tag :tr do%>
-    <%= content_tag :th, "Code:" %>
-    <%= content_tag :td, "#{@carpart.code}" %>
-    <%= content_tag :th, "Description:" %>
-    <%= content_tag :td, "#{@carpart.description}" %>
-    <% end%>
+      <%= content_tag :tr do%>
+      <%= content_tag :th, "Code:" %>
+      <%= content_tag :td, "#{@carpart.code}" %>
+      <% end%>
 
-    <%= content_tag :tr do%>
-    <%= content_tag :th, "Price:" %>
-    <%= content_tag :td, "#{@carpart.price}" %>
-    <% end%>
+      <%= content_tag :tr do%>
+      <%= content_tag :th, "Price:" %>
+      <%= content_tag :td, "#{@carpart.price}" %>
+      <% end%>
 
-    <%= content_tag :tr do%>
-    <%= content_tag :th, "Stock:" %>
-    <%= content_tag :td, "#{@carpart.stock}" %>
-    <% end%>
+      <%= content_tag :tr do%>
+      <%= content_tag :th, "Stock:" %>
+      <%= content_tag :td, "#{@carpart.stock}" %>
+      <% end%>
 
-<% end%>
-<% content_tag :h3, "Characteristics"%>
-<%= content_tag :table, class: "table well-br" do%>
-<%= content_tag :tr do%>
-<% (0...(@carpart.details[0]).size()).each do |i| %>
-    <% @carpart.details[0][i].each do |key, value| %>
-      <%= content_tag :th, "#{key}:" %>
-      <%= content_tag :td, "#{value}"  %>
-    <% end %>
+  <% end%>
+<hr>
+<%= content_tag :h5, "Description:", class: "shadow" %>
+<%= content_tag :h5, "#{@carpart.description}", class: "well" %>
+
+<hr>
+
+<%= content_tag :h5, "Characteristics", class: "shadow"%>
+<%= content_tag :table, class: "table" do%>
+      <% (0...(@carpart.details[0]).size()).each do |i| %>
+          <% @carpart.details[0][i].each do |key, value| %>
+          <%= content_tag :tr do%>
+            <%= content_tag :th, "#{key}:" %>
+            <%= content_tag :td, "#{value}"  %>
+          <% end %>
+      <% end %>
   <% end %>
 <% end %>
-<% end %>
+
+<hr>
+<%= content_tag :label, "Sold by:", class: "shadow"%>
+<%= content_tag :label, Company.where(:id => @carpart.company_id)[0].name%>
 
 </div>
 
-  </div>
-<!-- link_to 'Edit', edit_company_car_carpart_path(@carpart) -->
-<%= link_to 'Back', company_car_carparts_path %>
+</div>
+<!-- link_to 'Edit', edit_company_car_@carpart_path(@@carpart) -->
+<%= link_to 'Back', companies_path, class: "label-back" %>

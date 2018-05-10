@@ -103,6 +103,7 @@
 
  .putinline {
    clear: both;
+   margin: 10px;
  }
 
  textarea {
@@ -180,8 +181,8 @@ hr.well {
 }
 
 .img-fit {
-  width: 90%;
-  height: auto;
+  // width: 90%;
+  height: 100px;
 }
 
 h5 span {

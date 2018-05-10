@@ -7,5 +7,6 @@
    <% if (current_user.try(:vip?) && current_user.id == company.user_id) or current_user.try(:admin?) %>
      <%= link_to 'Edit', edit_company_path(company), class: "btn btn-warning" %>
      <%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+     <%= link_to 'Add new car', new_company_car_path(company), class: "btn btn-success putinline" %>
 <% end %>
 <% end %>

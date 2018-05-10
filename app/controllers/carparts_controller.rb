@@ -141,18 +141,21 @@ class CarpartsController < ApplicationController
 
   def search_final
     case
-    when [params[:makeyear].nil?, params[:make].nil?, params[:model].nil?, params[:part].nil?]
-      redirect_to companies_path, alert: "Unable to find year!"
-    when [params[:makeyear].present?, params[:make].nil?, params[:model].nil?, params[:part].nil?]
-      redirect_to companies_path, alert: "Unable to find make!"
-    when [params[:makeyear].present?, params[:make].present?, params[:model].nil?, params[:part].nil?]
-      redirect_to companies_path, alert: "Unable to find model!"
-    when [params[:makeyear].present?, params[:make].present?, params[:model].present?, params[:part].nil?]
-      redirect_to companies_path, alert: "Unable to find part!"
-    when params[:part].present?
-      @carpart = Carpart.find_by(params[:part])
+    when params.size() == 6
+      redirect_to companies_path, alert: "Please select year!"
+    when params.size() == 7
+      redirect_to companies_path, alert: "Please select make!"
+    when params.size() == 8
+      redirect_to companies_path, alert: "Please select model!"
+    when params[:part] == ''
+      redirect_to companies_path, alert: "Please select part!"
     else
-        redirect_to companies_path, alert: "Unable to find part!"
+      @carpartname = Carpart.find(params[:part])
+        if @carpartname.present?
+          @carpart = Carpart.where(['name = ? and car_id = ?', @carpartname.name, @carpartname.car_id])
+        else
+          redirect_to companies_path, alert: "Unable to find part!"
+        end
     end
   end
 

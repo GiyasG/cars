@@ -7,8 +7,8 @@ $(document).on("change", "select#makeyear", function () {
           success: function(response, status) {
             if (response != "") {
               $("div#makeit").html(response);
-              $("select#model").html("<option>Choose model</option>");
-              $("select#part").html("<option>Choose model</option>");
+              $("select#model").html("<option disabled>Choose model</option>");
+              $("select#part").html("<option disabled>Choose model</option>");
              }
             }
       });
