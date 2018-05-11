@@ -4,7 +4,6 @@ class CarpartsController < ApplicationController
   after_action  :verify_authorized, only: [:new, :edit, :update, :destroy]
   before_filter :edit_carpart_params, :only => [:update]
 
-
   def index
     @company = Company.find(params[:company_id])
     @carparts = @car.carparts.all
@@ -89,9 +88,7 @@ class CarpartsController < ApplicationController
      else
        redirect_to companies_path, alert: "Unable to update part!"
      end
-
  end
-
 
  def destroy
    @company = Company.find(params[:company_id])
@@ -100,7 +97,6 @@ class CarpartsController < ApplicationController
    @carpart.destroy
    redirect_to companies_path, notice: "Part deleted!"
  end
-
 
   def edit_carpart_params
     @company = Company.find(params[:company_id])
