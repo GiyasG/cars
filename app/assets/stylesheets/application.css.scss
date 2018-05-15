@@ -21,7 +21,8 @@
    @extend .img-responsive;
    margin: 0 auto;
    }
- // override for the 'Home' navigation link
+
+   // override for the 'Home' navigation link
  .navbar-brand {
    font-size: inherit;
    }
@@ -50,7 +51,8 @@
 
  main {
    @extend .container;
-   background-color: #eee;
+   // background-color: #eee;
+   opacity: 0.9;
    padding-bottom: 80px;
    width: 100%;
    margin-top: 51px; // accommodate the navbar
@@ -58,7 +60,32 @@
 
  section {
    @extend .row;
+   background-color: slategrey;
    margin-top: 20px;
+   border-radius: 15px;
+   }
+
+.row {
+  margin: 0px;
+  background-color: grey;
+}
+
+.row a, label {
+  color: white;
+}
+
+.panel {
+  margin-bottom: 5px;
+}
+   body {
+     // background-image: url('/assets/spinner.svg');
+     background-repeat: repeat;
+     color: black;
+   }
+
+   .withback {
+     background-image: url("carparts1.png");
+     background-size: 900px auto;
    }
 
  // Styles for form views
@@ -67,6 +94,9 @@
  .well-br {
    @extend .well;
    border-color: #393579;
+   background-color: slategray;
+   border-radius: 10px;
+   margin: 5px;
  }
  .authform {
    padding-top: 30px;
@@ -157,8 +187,8 @@ a.label-delete:active, a.label-edit:active {
 }
 
 hr {
+  margin-top: 5px;
   clear: both;
-  margin-bottom: 0px;
   border : 0;
   height: 3px;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
@@ -183,6 +213,12 @@ hr.well {
 .img-fit {
   // width: 90%;
   height: 100px;
+}
+
+.img-hit {
+  height: auto;
+  width: 70%;
+  padding-bottom: 10px;
 }
 
 h5 span {

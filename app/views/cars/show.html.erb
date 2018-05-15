@@ -1,6 +1,8 @@
     <div class='row'>
       <%= content_tag :h4, "#{@car.make} #{@car.model}", class: "col-md-12"%>
-      <%= image_tag url_for(:controller => "photos", :action => "show_car", :car_id=>@car.id), class: "col-md-4"%>
+    <div class='col-md-4'>
+      <%= image_tag url_for(:controller => "photos", :action => "show_car", :car_id=>@car.id), class: "img-hit"%>
+    </div>
 
     <div class='col-md-8'>
       <%= content_tag :table, class: "table well-br" do%>

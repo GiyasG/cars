@@ -1,38 +1,42 @@
 <section>
- <div class="text-center shadow"><h2>Search area</h2></div>
- <div class="row">
-   <div class="col-md-3">
+<div class="row text-center">
+<div class="col-md-3 col-sm-3 well-br">
+<h2 class="shadow">Search area</h2>
+<hr>
 <%= form_for :search_final, url: search_final_path do |form| %>
 <%= content_tag :div, class: "row" do %>
-   <label class="col-md-6">Select year</label>
+   <label class="col-md-6 col-sm-6 col-xs-6">Select year</label>
    <%= select_tag 'makeyear', options_for_select(@makeyears, 'makeyear'),
-   include_blank: true, disabled: false, class: "col-md-6" %>
+   include_blank: true, disabled: false, class: "col-md-6 col-sm-6 col-xs-6" %>
    <% end %>
    <br>
 
    <%= content_tag :div, id: "makeit", class: "row" do %>
-   <label class="col-md-6">Select make</label>
+   <label class="col-md-6 col-sm-6 col-xs-6">Select make</label>
    <%= select_tag 'make', options_from_collection_for_select(@cars, 'make', 'make'),
-   include_blank: true, disabled: true, class: "col-md-6" %>
+   include_blank: true, disabled: true, class: "col-md-6 col-sm-6 col-xs-6" %>
    <% end %>
    <br>
    <%= content_tag :div, id: "modelit", class: "row" do %>
-   <label class="col-md-6">Select model</label>
+   <label class="col-md-6 col-sm-6 col-xs-6">Select model</label>
    <%= select_tag 'model', options_from_collection_for_select(@cars, 'model', 'model'),
-   include_blank: true, disabled: true, class: "col-md-6" %>
+   include_blank: true, disabled: true, class: "col-md-6 col-sm-6 col-xs-6" %>
    <% end %>
    <br>
    <%= content_tag :div, id: "partit", class: "row" do %>
-   <label class="col-md-6">Select part</label>
+   <label class="col-md-6 col-sm-6 col-xs-6">Select part</label>
    <%= select_tag 'part', options_from_collection_for_select(@carparts, 'id', 'name'),
-   include_blank: true, disabled: true, class: "col-md-6" %>
+   include_blank: true, disabled: true, class: "col-md-6 col-sm-6 col-xs-6" %>
    <% end %>
    <br>
     <%= form.submit "Search", class: "btn btn-primary", id: "search_p"  %>
  <% end %>
 </div>
-<div class="col-md-9">
-  <%= image_tag("mers.jpg")  %>
+
+<div class="col-md-8 col-sm-11">
+<h2 class="shadow">Logo area</h2>
+<hr>
+  <%= image_tag("mers.jpg", class: "img-hit")  %>
 </div>
 
 </div>
@@ -45,7 +49,7 @@
  <div class="text-center shadow"><h2>Car parts</h2>
 
    <% @carparts.each do |carpart| %>
-   <%= content_tag :div, id: "cpt_#{carpart.id}", class: "col-md-2 col-sm-4 text-center well" do %>
+   <%= content_tag :div, id: "cpt_#{carpart.id}", class: "col-md-2 col-sm-4 text-center well-br" do %>
       <%= link_to company_car_carpart_path(carpart.company_id, carpart.car_id, carpart.id)  do%>
             <%= image_tag url_for(:controller => "photos", :action => "show_carpart", :carpart_id=>carpart.id,
              :id=>carpart.photos[0][:id]), class: "img-fit"%>
@@ -69,7 +73,7 @@
   <div class="text-center shadow"><h2>Cars</h2>
   </div>
    <% @cars.each do |car| %>
-   <%= content_tag :div, :id => "crs_#{car.id}", class: "col-md-2 col-sm-4 text-center well" do %>
+   <%= content_tag :div, :id => "crs_#{car.id}", class: "col-md-2 col-sm-4 text-center well-br" do %>
    <%= link_to [@companies.where(:id => car.company_id)[0], car] do%>
             <%= image_tag url_for(:controller => "photos", :action => "show_car", :car_id=>car.id,
              :id=>car.photos[0][:id]), class: "img-fit"%>
@@ -89,20 +93,21 @@
 </section>
 
 <hr class="panel">
-<div class="text-center shadow"><h2>Companies</h2>
-<% if user_signed_in? %>
- <% if current_user.try(:vip?) %>
- <span>
-   <%= link_to 'Add new Company', new_company_path, class: "btn btn-success putinline" %>
- </span>
-<% end %>
-<% end %>
-</div>
 
 <section class='row'>
 
+  <div class="text-center shadow"><h2>Companies</h2>
+  <% if user_signed_in? %>
+   <% if current_user.try(:vip?) %>
+   <span>
+     <%= link_to 'Add new Company', new_company_path, class: "btn btn-success putinline" %>
+   </span>
+  <% end %>
+  <% end %>
+  </div>
+
 <% @companies.each do |company| %>
-    <%= content_tag :div, :id => "cmp_#{company.id}", class: "col-md-2 text-center well" do %>
+    <%= content_tag :div, :id => "cmp_#{company.id}", class: "col-md-2 text-center well-br" do %>
         <%= link_to company, remote: true  do%>
              <%= image_tag url_for(:controller => "logos", :action => "show_company", :company_id=>company.id,
               :id=>company.logos[0][:id]), class: "img-fit img-thumbnail"%>
