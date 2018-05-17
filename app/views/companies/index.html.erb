@@ -125,3 +125,34 @@
 
 </section>
 <hr class="panel">
+
+<h1>Use Bootstrap's carousel to show multiple items per slide.</h1>
+
+<div class="col-md-10 col-md-offset-1">
+<div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel">
+  <div class="carousel-inner">
+
+    <% @carparts.each_with_index do |carpart, index| %>
+    <div class="item <%= 'active' if index == 0%>">
+       <%= content_tag :div, id: "cpt_#{carpart.id}", class: "col-xs-12 col-sm-6 col-md-2 text-center well-br" do %>
+            <%= link_to company_car_carpart_path(carpart.company_id, carpart.car_id, carpart.id)  do%>
+                  <%= image_tag url_for(:controller => "photos", :action => "show_carpart", :carpart_id=>carpart.id,
+                   :id=>carpart.photos[0][:id]), class: "img-fit"%>
+                  <%= content_tag :h4, carpart.name%>
+                  <%= content_tag :h4, @companies.where(:id => carpart.company_id)[0].name%>
+            <% end %>
+                  <% if user_signed_in? %>
+                   <% if (current_user.try(:vip?) && current_user.id == @companies.where(:id => carpart.company_id)[0].user_id) or current_user.try(:admin?) %>
+                     <%= link_to 'Edit', edit_company_car_carpart_path(carpart.company_id, carpart.car_id, carpart.id), class: "btn btn-warning" %>
+                     <%= link_to 'Destroy', company_car_carpart_path(carpart.company_id, carpart.car_id, carpart.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                   <% end %>
+                  <% end %>
+                <% end %>
+    </div>
+    <% end %>
+
+  </div>
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+</div>
+</div>
