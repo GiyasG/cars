@@ -1,26 +1,14 @@
-// e.preventDefault();
-// var id = $(this).attr('id');
-// alert(id);
-// $("#"+id).html("<%= escape_javascript(render partial: 'companies/show', locals: { company: @company, id: "cmp" } ) %>");
 
-// $("#cmp_<%= @company.id%>").click(function(e) {
-//   e.preventDefault();
-  // alert("cmp_<%= @company.id%>");
   if ($("#cmp_<%= @company.id%>").length) {
     $("#cmp_<%= @company.id%>").html("");
     // $("#cmp_<%= @company.id%>").removeClass("col-md-2").addClass("col-md-12").animate({width: "100%"});
-    $("#cmp_<%= @company.id%>").removeClass("col-md-2").addClass("col-md-12").addClass("animated zoomInRight");
+    $("#cmp_<%= @company.id%>").removeClass("col-md-2").addClass("col-md-12"); //.addClass("animated zoomInRight")
     $("#cmp_<%= @company.id%>").html("<%= escape_javascript(render partial: 'companies/show_12', locals: { company: @company } ) %>");
     $("#cmp_<%= @company.id%>").attr("id", "<%= @company.id%>cmp_");
   } else {
       $("#cmp_<%= @company.id%>").html("");
       // $("#<%= @company.id%>cmp_").removeClass("col-md-12").animate({width: "14%"}).addClass("col-md-2").animate({width: "16.6%"});
-      $("#<%= @company.id%>cmp_").removeClass("col-md-12").addClass("col-md-2").removeClass("animated zoomInRight");
+      $("#<%= @company.id%>cmp_").removeClass("col-md-12").addClass("col-md-2"); //.removeClass("animated zoomInRight");
       $("#<%= @company.id%>cmp_").html("<%= escape_javascript(render partial: 'companies/show', locals: { company: @company } ) %>");
       $("#<%= @company.id%>cmp_").attr("id", "cmp_<%= @company.id%>");
   }
-// });
-
-// $("#<%= @company.id%>cmp_").click(function(e) {
-//   e.preventDefault();
-// });

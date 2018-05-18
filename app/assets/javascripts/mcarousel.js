@@ -18,5 +18,7 @@ $('.carousel[data-type="multi"] .item').each(function(){
 });
 };
 
-$(document).ready(ready);
-$(document).on('page:change', ready);
+// $(document).ready(ready);
+// $(document).on('change', console.log('change'));
+// $(document).on('change','#myCarousel', function(){ console.log('change'); });
+$(document).on('turbolinks:load', ready);
