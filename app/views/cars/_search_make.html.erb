@@ -1,6 +1,6 @@
-<label class="col-md-6">Select make</label>
+<label class="col-md-5 col-sm-5">Select make</label>
 <% if @makes.present? %>
-  <%= select_tag 'make', options_for_select(@makes, 'make'), prompt: "Choose make", disabled: false, class: "col-md-6"  %>
+  <%= select_tag 'make', options_for_select(@makes, 'make'), prompt: "Choose make", disabled: false, class: "col-md-5  col-sm-5"  %>
 <% else %>
-  <%= select_tag "make", "<option>Not found</option>".html_safe, disabled: true, class: "col-md-6" %>
+  <%= select_tag "make", "<option>Not found</option>".html_safe, disabled: true, class: "col-md-5 col-sm-5" %>
 <% end %>
